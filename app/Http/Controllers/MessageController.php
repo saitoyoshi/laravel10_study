@@ -14,4 +14,12 @@ class MessageController extends Controller
 
         return View('message/index', ['messages' => $messages]);
     }
+    public function store(Request $request)
+    {
+        $message = new Message();
+        $message->body = $request->body;
+        $message->save();
+
+        return redirect('/messages');
+    }
 }
