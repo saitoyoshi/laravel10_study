@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title',100);
             $table->string('author',50);
             $table->integer('price');
-            $table->foreignId('categories_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });
     }
