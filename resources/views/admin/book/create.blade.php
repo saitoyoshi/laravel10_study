@@ -3,7 +3,7 @@
         書籍登録
     </x-slot:title>
 <h1>書籍登録</h1>
-        <x-alert >
+        <x-alert class="danger">
             <x-error-messages :$errors />
         </x-alert>
         <form action={{ route('book.store') }} method="POST">
