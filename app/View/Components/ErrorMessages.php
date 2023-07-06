@@ -25,4 +25,8 @@ class ErrorMessages extends Component
     {
         return view('components.error-messages');
     }
+    public function has2MoreErrors(): bool
+    {
+        return count($this->errors) > 2;
+    }
 }
