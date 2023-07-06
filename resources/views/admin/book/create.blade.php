@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>書籍登録</title>
-</head>
-<body>
-    <main>
-        <h1>書籍登録</h1>
+<x-layouts.book-manager>
+    <x-slot:title>
+        書籍登録
+    </x-slot:title>
+<h1>書籍登録</h1>
         <x-alert >
             <x-error-messages :$errors />
         </x-alert>
@@ -34,8 +28,5 @@
                 <input type="text" name="price" value="{{ old('price') }}">
             </div>
             <input type="submit" value="送信">
-
         </form>
-    </main>
-</body>
-</html>
+    </x-layouts.book-manager>
