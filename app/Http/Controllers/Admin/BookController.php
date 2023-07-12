@@ -53,4 +53,12 @@ class BookController extends Controller
 
         return redirect(route('book.index'))->with('message', $book->title . 'を追加しました');
     }
+    public function edit(Book $book): View
+    {
+        $categories = Category::all();
+        $authors = Author::all();
+        $authorIds = $book->authors()->pluck('id')->all();
+
+        return view('admin.book.edit', compact('book','categories', 'authors','authorIds'));
+    }
 }
