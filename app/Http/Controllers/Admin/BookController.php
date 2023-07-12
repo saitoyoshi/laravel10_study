@@ -25,11 +25,9 @@ class BookController extends Controller
         ->header('Content-Type', 'text/html')
         ->header('Content-Encoding', 'UTF-8');
     }
-    public function show(string $id): Book
+    public function show(Book $book): View
     {
-        $book = Book::findOrFail($id);
-
-        return $book;
+        return view('admin.book.show', compact('book'));
     }
     public function create(): View
     {

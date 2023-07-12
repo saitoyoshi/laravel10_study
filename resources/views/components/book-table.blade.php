@@ -9,7 +9,9 @@
 
     @endif>
         <td>{{ $book->category->title }}</td>
-        <td>{{ $book->title }}</td>
+        <td>
+            <a href="{{ route('book.show',$book) }}">{{ $book->title }}</a>
+        </td>
         <td>{{ $book->price }}</td>
     </tr>
 @endforeach
