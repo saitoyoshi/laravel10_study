@@ -77,10 +77,8 @@ class BookController extends Controller
     }
     public function destory(Book $book): RedirectResponse
     {
-        DB::transaction(function() use($book) {
-            $book->authors()->detach();
-            $book->delete();
-        });
+        // カスケードしているので
+        $book->delete();
 
         return redirect(route('book.index'))->with('message', $book->title . 'を削除しました。');
     }
