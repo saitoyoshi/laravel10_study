@@ -62,7 +62,7 @@ class BookController extends Controller
 
         return view('admin.book.edit', compact('book','categories', 'authors','authorIds'));
     }
-    public function update(Book $book, BookPutRequest $request): View
+    public function update(Book $book, BookPutRequest $request): RedirectResponse
     {
         $book->category_id = $request->category_id;
         $book->title = $request->title;
@@ -73,7 +73,7 @@ class BookController extends Controller
             $book->authors()->sync($request->author_ids);
         });
 
-        return view(route('book.index'))->with('message', $book->title . 'を更新しました。');
+        return redirect(route('book.index'))->with('message', $book->title . 'を更新しました。');
     }
 
 }
