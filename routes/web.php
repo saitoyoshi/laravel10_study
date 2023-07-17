@@ -43,14 +43,15 @@ Route::prefix('admin')->group(function() {
     Route::name('admin.')
     ->controller(AuthenticatedSessionController::class)
     ->group(function() {
-        Route::get('login', 'create')->name('create');
-        Route::post('login', 'store')->name('store');
-        Route::post('logout', 'destory')->name('destory');
+        Route::get('login', 'create')->name('create')->middleware('guest:admin');
+        Route::post('login', 'store')->name('store')->middleware('guest:admin');
+        Route::post('logout', 'destroy')->name('destroy')->middleware('auth:admin');
     });
 
     Route::prefix('books')
     ->name('book.')
     ->controller(BookController::class)
+    ->middleware('auth:admin')
     ->group(function() {
         Route::get('', 'index')->name('index');
         Route::get('{book}', 'show')->whereNumber('book')->name('show');
