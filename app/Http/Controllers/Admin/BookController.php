@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 {
@@ -30,6 +31,7 @@ class BookController extends Controller
     }
     public function show(Book $book): View
     {
+        Log::info('書籍詳細情報が参照されました。ID=' . $book->id);
         return view('admin.book.show', compact('book'));
     }
     public function create(): View
