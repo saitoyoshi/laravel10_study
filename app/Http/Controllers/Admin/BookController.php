@@ -84,6 +84,7 @@ class BookController extends Controller
     }
     public function destory(Book $book): RedirectResponse
     {
+        $this->authorize('delete', $book);
         // カスケードしているので
         $book->delete();
 
