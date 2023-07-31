@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -48,6 +49,7 @@ class BookController extends Controller
         $book->category_id = $request->category_id;
         $book->title = $request->title;
         $book->price = $request->price;
+        $book->admin_id = Auth::id();
 
         DB::transaction(function () use ($book, $request) {
             $book->save();
