@@ -70,6 +70,7 @@ class BookController extends Controller
     }
     public function update(Book $book, BookPutRequest $request): RedirectResponse
     {
+        $this->authorize('update', $book);
         $book->category_id = $request->category_id;
         $book->title = $request->title;
         $book->price = $request->price;
