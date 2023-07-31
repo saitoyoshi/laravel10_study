@@ -61,9 +61,7 @@ class BookController extends Controller
     public function edit(Book $book): View
     {
         // 作成者以外はアクセス不可にする
-        if (Auth::user()->cannot('update', $book)) {
-            abort(403);
-        }
+        $this->authorize('update', $book);
         $categories = Category::all();
         $authors = Author::all();
         $authorIds = $book->authors()->pluck('id')->all();
