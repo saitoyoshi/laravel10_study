@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Auth\Admin\AuthenticatedSessionController;
 use App\Http\Controllers\MessageController;
-
+use App\Models\Book;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,10 +55,11 @@ Route::prefix('admin')->group(function() {
     ->group(function() {
         Route::get('', 'index')->name('index');
         Route::get('{book}', 'show')->whereNumber('book')->name('show');
-        Route::get('create', 'create')->name('create');
-        Route::post('', 'store')->name('store');
-        Route::get('{book}/edit', 'edit')->name('edit');
-        Route::put('{book}','update')->whereNumber('book')->name('update');
-        Route::delete('{book}', 'destory')->whereNumber('book')->name('destory');
+        Route::get('create', 'create')->name('create')
+        ->can('create', Book::class);
+        Route::post('', 'store')->name('store')->can('create', Book::class);
+        Route::get('{book}/edit', 'edit')->name('edit')->can('update', 'book');
+        Route::put('{book}','update')->whereNumber('book')->name('update')->can('update', 'book');
+        Route::delete('{book}', 'destory')->whereNumber('book')->name('destory')->can('delete', 'book');
     });
 });

@@ -37,7 +37,6 @@ class BookController extends Controller
     }
     public function create(): View
     {
-        $this->authorize('create', Book::class);
         $categories = Category::all();
         $authors = Author::all();
 
@@ -45,7 +44,6 @@ class BookController extends Controller
     }
     public function store(BookPostRequest $request): RedirectResponse
     {
-        $this->authorize('create', Book::class);
         $book = new Book();
 
         $book->category_id = $request->category_id;
@@ -62,8 +60,6 @@ class BookController extends Controller
     }
     public function edit(Book $book): View
     {
-        // 作成者以外はアクセス不可にする
-        $this->authorize('update', $book);
         $categories = Category::all();
         $authors = Author::all();
         $authorIds = $book->authors()->pluck('id')->all();
@@ -72,7 +68,6 @@ class BookController extends Controller
     }
     public function update(Book $book, BookPutRequest $request): RedirectResponse
     {
-        $this->authorize('update', $book);
         $book->category_id = $request->category_id;
         $book->title = $request->title;
         $book->price = $request->price;
@@ -86,7 +81,6 @@ class BookController extends Controller
     }
     public function destory(Book $book): RedirectResponse
     {
-        $this->authorize('delete', $book);
         // カスケードしているので
         $book->delete();
 
