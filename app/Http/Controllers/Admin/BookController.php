@@ -37,6 +37,7 @@ class BookController extends Controller
     }
     public function create(): View
     {
+        $this->authorize('create', Book::class);
         $categories = Category::all();
         $authors = Author::all();
 
@@ -44,6 +45,7 @@ class BookController extends Controller
     }
     public function store(BookPostRequest $request): RedirectResponse
     {
+        $this->authorize('create', Book::class);
         $book = new Book();
 
         $book->category_id = $request->category_id;

@@ -21,4 +21,7 @@ class BookPolicy
     public function delete(Admin $admin, Book $book): bool {
         return $admin->id === $book->admin_id;
     }
+    public function create(Admin $admin): bool {
+        return substr($admin->login_id, -11) === 'example.com';
+    }
 }
