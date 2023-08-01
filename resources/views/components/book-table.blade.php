@@ -23,7 +23,7 @@
             @endcan
         </td>
         <td>
-            <form action="{{ route('book.destory', $book) }}" method="POST">
+            <form action="{{ route('book.destroy', $book) }}" method="POST">
             @csrf
             @method('DELETE')
             <input type="submit" value="削除">

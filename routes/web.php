@@ -59,6 +59,6 @@ Route::prefix('admin')->group(function() {
         Route::post('', 'store')->name('store');
         Route::get('{book}/edit', 'edit')->name('edit');
         Route::put('{book}','update')->whereNumber('book')->name('update');
-        Route::delete('{book}', 'destory')->whereNumber('book')->name('destory');
+        Route::delete('{book}', 'destroy')->whereNumber('book')->name('destroy');
     });
 });
