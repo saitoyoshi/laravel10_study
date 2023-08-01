@@ -15,6 +15,13 @@ class BookPolicy
     {
         //
     }
+    public function viewAny(Admin $admin): bool {
+        return true;
+    }
+    public function view(Admin $admin): bool {
+        return true;
+    }
+
     public function update(Admin $admin, Book $book): bool {
         return $admin->id === $book->admin_id;
     }

@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 {
+    public function __construct() {
+        $this->authorizeResource(Book::class, 'book');
+    }
     public function index(): Response
     {
         $books = Book::with('category')
