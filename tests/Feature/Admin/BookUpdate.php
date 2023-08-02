@@ -37,7 +37,7 @@ class BookUpdate extends TestCase
 
         $this->authors = Author::factory(4)->create();
 
-        $this->book->authors()->attach([$this->categories[0]->id,$this->categories[2]->id]);
+        $this->book->authors()->attach([$this->authors[0]->id,$this->authors[2]->id]);
     }
     /** @test */
     public function アクセス制御(): void {
@@ -52,5 +52,20 @@ class BookUpdate extends TestCase
 
         $this->actingAs($this->admin, 'admin');
         $this->get($url)->assertOk();
+    }
+    /** @test */
+    public function 更新処理のアクセス制御(): void {
+        $url = route('book.update', $this->book);
+        $param = [
+            'category_id' => $this->categories[0]->id,
+            'title' => 'New laravel book',
+            'price' => '10000',
+            'author_ids' => [$this->authors[1]->id, $this->authors[2]->id],
+        ];
+        $this->put($url, $param)->assertRedirect(route('admin.create'));
+
+        $other = Admin::factory()->create();
+        $this->actingAs($other, 'admin');
+        $this->put($url, $param)->assertForbidden();
     }
 }
