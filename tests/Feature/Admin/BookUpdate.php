@@ -101,10 +101,45 @@ class BookUpdate extends TestCase
         $this->put($url, ['author_ids' => ['0']])->assertInvalid(['author_ids.0' => '正しい 著者 を選択']);
 
         $this->put($url, ['author_ids' => [$this->authors[2]->id]])->assertValid('author_ids.0');
+    }
+    /** @test */
+    public function 更新処理(): void {
+        $url = route('book.update', $this->book);
 
+        $param = [
+            'category_id' => $this->categories[0]->id,
+            'title' => 'New laravel book',
+            'price' => '1000',
+            'author_ids' => [
+                $this->authors[1]->id,
+                $this->authors[2]->id,
+            ],
+        ];
 
+        $this->actingAs($this->admin, 'admin');
 
+        $this->put($url, $param)->assertRedirect(route('book.index'));
 
+        $updatedBook = [
+            'id' => $this->book->id,
+            'category_id' => $param['category_id'],
+            'title' => $param['title'],
+            'price' => $param['price'],
+        ];
+        $this->assertDatabaseHas('books', $updatedBook);
 
+        foreach ($this->authors as $author) {
+            $authorBook = [
+                'book_id' => $this->book->id,
+                'author_id' => $author->id,
+            ];
+
+            if (in_array($author->id, $param['author_ids'])) {
+                $this->assertDatabaseHas('author_book', $authorBook);
+            } else {
+                $this->assertDatabaseMissing('author_book', $authorBook);
+            }
+        }
+        $this->get(route('book.index'))->assertSee($param['title'] . 'を更新しました');
     }
 }
