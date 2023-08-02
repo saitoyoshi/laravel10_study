@@ -67,5 +67,7 @@ class BookUpdate extends TestCase
         $other = Admin::factory()->create();
         $this->actingAs($other, 'admin');
         $this->put($url, $param)->assertForbidden();
+
+        $this->assertSame('Laravel book', $this->book->refresh()->title);
     }
 }
