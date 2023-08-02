@@ -41,14 +41,14 @@ class AutenticationTest extends TestCase
         [
             'login_id' => 'fuga',
             'password' => 'hogehoge',
-        ]))->assertRedirect(route('admin.create'));
+        ]))->assertRedirect(route('admin.create'))->assertInvalid(['login_id' => "These credentials do not match our records."]);
 
         // パスワードが違う
         $this->from(route('admin.store'))->post(route('admin.store',
         [
             'login_id' => 'hoge',
             'password' => 'fugafuga',
-        ]))->assertRedirect(route('admin.create'));
+        ]))->assertRedirect(route('admin.create'))->assertInvalid(['login_id' => "These credentials do not match our records."]);
 
 
         $this->assertGuest('admin');
