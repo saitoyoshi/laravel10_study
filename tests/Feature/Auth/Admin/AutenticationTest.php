@@ -10,32 +10,32 @@ use Tests\TestCase;
 class AutenticationTest extends TestCase
 {
     use RefreshDatabase;
+    private $admin;
+
+    public function setUp(): void {
+        parent::setUp();
+        $this->admin = Admin::factory()->create(
+            [
+            'login_id' => 'hoge',
+            'password' => \Hash::make('hogehoge')
+            ]
+        );
+    }
     /** @test */
     public function ログイン画面表示(): void {
         $response = $this->get(route('admin.create'))->assertOk();
     }
     /** @test */
     public function ログイン成功する():void {
-        $admin = Admin::factory()->create(
-            [
-            'login_id' => 'hoge',
-            'password' => \Hash::make('hogehoge')
-            ]
-        );
         $this->post(route('admin.store',
         [
             'login_id' => 'hoge',
             'password' => 'hogehoge',
         ]))->assertRedirect(route('book.index'));
-        $this->assertAuthenticatedAs($admin, 'admin');
+        $this->assertAuthenticatedAs($this->admin, 'admin');
     }
     /** @test */
     public function ログイン失敗する(): void {
-        $admin = Admin::factory()->create([
-            'login_id' => 'hoge',
-            'password' => \Hash::make('hogehoge'),
-        ]);
-
         // idが違う
         $this->from(route('admin.store'))->post(route('admin.store',
         [
