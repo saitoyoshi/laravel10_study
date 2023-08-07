@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,6 @@ Route::prefix('/messages')->controller(MessageController::class)->name('messages
     Route::put('/update/edit/{message}', 'edit')->name('edit');
     Route::delete('/{message}', 'delete')->name('destroy');
 });
+
+Route::get('admin/books', [BookController::class, 'index'])->name('book.index');
+Route::get('admin/books/{id}', [BookController::class, 'show'])->whereNumber('id')->name('book.show');
