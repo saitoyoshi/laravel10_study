@@ -27,5 +27,8 @@ Route::prefix('/messages')->controller(MessageController::class)->name('messages
     Route::delete('/{message}', 'delete')->name('destroy');
 });
 
-Route::get('admin/books', [BookController::class, 'index'])->name('book.index');
-Route::get('admin/books/{id}', [BookController::class, 'show'])->whereNumber('id')->name('book.show');
+Route::prefix('admin/books')->controller(BookController::class)->name('book')->group(function () {
+    Route::get('', 'index')->name('index');
+    Route::get('/{id}', 'show')->whereNumber('id')->name('show');
+
+});
