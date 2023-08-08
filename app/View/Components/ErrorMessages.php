@@ -17,7 +17,12 @@ class ErrorMessages extends Component
     {
         $this->errors = $errors;
     }
-
+    /**
+     * エラーが２件以上あるかどうか
+     */
+    public function has2MoreErrors() {
+        return count($this->errors) > 2;
+    }
     /**
      * Get the view / contents that represent the component.
      */

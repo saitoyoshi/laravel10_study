@@ -9,7 +9,7 @@
 <body>
     <main>
         <h1>書籍登録</h1>
-        <x-error-messages :errors />
+        <x-error-messages :$errors />
         <form action="{{ route('book.store') }}" method="post">
             @csrf
             <div>
@@ -19,7 +19,6 @@
                     <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>
                         {{ $category->title }}
                     </option>
-
                     @endforeach
                 </select>
             </div>
