@@ -25,7 +25,7 @@
                 <label for="">カテゴリ</label>
                 <select name="category_id" id="">
                     @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">
+                    <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>
                         {{ $category->title }}
                     </option>
 
@@ -34,11 +34,11 @@
             </div>
             <div>
                 <label for="">タイトル</label>
-                <input type="text" name="title">
+                <input type="text" name="title" value="{{ old('title') }}">
             </div>
             <div>
                 <label for="">価格</label>
-                <input type="text" name="price">
+                <input type="text" name="price" value="{{  old('price') }}">
             </div>
             <button>送信</button>
         </form>
