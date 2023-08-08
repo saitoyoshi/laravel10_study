@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <main>
+<x-layouts.book-manager>
+    <x-slot:title>
+        書籍登録
+    </x-slot:title>
         <h1>書籍登録</h1>
+        @if($errors->any())
         <x-alert>
             <x-error-messages :$errors />
         </x-alert>
+        @endif
+
         <form action="{{ route('book.store') }}" method="post">
             @csrf
             <div>
@@ -34,6 +31,4 @@
             </div>
             <button>送信</button>
         </form>
-    </main>
-</body>
-</html>
+    </x-layouts>
