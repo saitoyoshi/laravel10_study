@@ -9,7 +9,9 @@
 <body>
     <main>
         <h1>書籍登録</h1>
-        <x-error-messages :$errors />
+        <x-alert>
+            <x-error-messages :$errors />
+        </x-alert>
         <form action="{{ route('book.store') }}" method="post">
             @csrf
             <div>
