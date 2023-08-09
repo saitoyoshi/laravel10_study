@@ -1,4 +1,4 @@
-<div id="alert">
+<div id="alert" {{ $attributes }}>
     {{ $slot }}
 </div>
 <style>
@@ -9,5 +9,13 @@
         border-radius: 5px;
         box-sizing: border-box;
         background-color: #f2f2f2;
+    }
+    #alert.danger {
+        background-color: #ff2f2f;
+        color: red;
+    }
+    #alert.info {
+        background-color: #f2f2ff;
+        color: blue;
     }
 </style>

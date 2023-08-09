@@ -1,7 +1,6 @@
-@if($errors->any())
+
     <div style="color: red">
         <ul>
-
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
             @if($loop->iteration >= 2)
@@ -13,4 +12,3 @@
         @endif
      </ul>
     </div>
-@endif
