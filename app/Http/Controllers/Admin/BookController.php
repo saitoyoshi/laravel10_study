@@ -17,9 +17,9 @@ class BookController extends Controller
         $books = Book::with('category')->orderBy('category_id')->orderBy('title')->get();
         return view('admin.book.index', compact('books'));
     }
-    public function show(string $id): Book {
-        $book = Book::findOrFail($id);
-        return $book;
+    public function show(Book $book): View {
+
+        return view('admin.book.show', compact('book'));
     }
     public function create(): View {
         $categories = Category::all();
