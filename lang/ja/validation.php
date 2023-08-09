@@ -19,6 +19,8 @@ return [
         'title' => 'タイトル',
         'price' => '価格',
         'message' => 'メッセージ',
-        'body' =>'メッセージ',
+        'body' => 'メッセージ',
+        'author_ids' => '著者',
+        'author_ids.*' => '著者',
     ],
 ];
