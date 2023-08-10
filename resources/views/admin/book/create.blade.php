@@ -3,6 +3,7 @@
         書籍登録
     </x-slot:title>
         <h1>書籍登録</h1>
+        <a href="{{ route('book.index') }}">戻る</a>
         @if($errors->any())
         <x-alert class="danger">
             <x-error-messages :$errors />
