@@ -9,6 +9,10 @@
 <body>
     <header>
         書籍管理システム
+        <form action="{{ route('admin.destroy') }}" method="post">
+            @csrf
+            <button>ログアウト</button>
+        </form>
         <hr>
     </header>
     <main>

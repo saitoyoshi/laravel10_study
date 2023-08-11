@@ -57,3 +57,9 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });
+
+// Route::prefix('admin.')->controller(AuthenticatedSessionController::class)->group(function() {
+//     Route::get('login', 'create')->name('create');
+//     Route::post('login', 'store')->name('store');
+//     Route::post('logout', 'desroy')->name('destroy');
+// });
