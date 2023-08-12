@@ -44,12 +44,13 @@ Route::prefix('/messages')->controller(MessageController::class)->name('messages
 Route::prefix('admin')->group(function() {
 
     Route::name('admin.')->controller(AuthenticatedSessionController::class)->group(function() {
-        Route::get('login', 'create')->name('create');
-        Route::post('login', 'store')->name('store');
-        Route::post('logout', 'destroy')->name('destroy');
+        Route::get('login', 'create')->name('create')->middleware('guest:admin');
+        Route::post('login', 'store')->name('store')->middleware('guest:admin');
+        Route::post('logout', 'destroy')->name('destroy')->middleware('auth:admin');
     });
 
-    Route::prefix('books')->controller(BookController::class)->name('book.')->group(function () {
+    Route::prefix('books')->middleware('auth:admin')->
+    controller(BookController::class)->name('book.')->group(function () {
         Route::get('', 'index')->name('index');
         Route::get('/{book}', 'show')->whereNumber('book')->name('show');
         Route::get('create', 'create')->name('create');
